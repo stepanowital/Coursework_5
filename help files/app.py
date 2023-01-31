@@ -1,3 +1,7 @@
+from flask import Flask, render_template, request, json
+from unit import BaseUnit
+
+
 app = Flask(__name__)
 
 heroes = {
@@ -11,7 +15,7 @@ arena =  ... # TODO инициализируем класс арены
 @app.route("/")
 def menu_page():
     # TODO рендерим главное меню (шаблон index.html)
-    pass
+    return render_template("index.html", heroes=heroes)
 
 
 @app.route("/fight/")
@@ -19,6 +23,7 @@ def start_fight():
     # TODO выполняем функцию start_game экземпляра класса арена и передаем ему необходимые аргументы
     # TODO рендерим экран боя (шаблон fight.html)
     pass
+
 
 @app.route("/fight/hit")
 def hit():
@@ -54,6 +59,10 @@ def end_fight():
 def choose_hero():
     # TODO кнопка выбор героя. 2 метода GET и POST
     # TODO на GET отрисовываем форму.
+    if request.method == 'GET':
+        return render_template('hero_choosing.html', heroes=heroes, weapons=weapons, armors=armors)
+    if request.method == 'POST':
+        req = json.loads(request.data)
     # TODO на POST отправляем форму и делаем редирект на эндпоинт choose enemy
     pass
 
