@@ -46,7 +46,7 @@ class Skill(ABC):
 		"""
 		self.user = user
 		self.target = target
-		if self._is_stamina_enough:
+		if self._is_stamina_enough():
 			return self.skill_effect()
 		return f"{self.user.name} попытался использовать {self.name} но у него не хватило выносливости."
 

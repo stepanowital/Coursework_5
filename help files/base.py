@@ -87,6 +87,11 @@ class Arena(metaclass=BaseSingleton):
         # ODO возвращаем результат удара строкой
         result = self.player.hit(self.enemy)
         turn_result = self.next_turn()
+
+        result_enemy = self._check_players_hp()
+        if result_enemy is not None:
+            return f"{result}\n{turn_result}\n{result_enemy}"
+
         return f"{result}\n{turn_result}"
 
     def player_use_skill(self) -> str:
@@ -96,4 +101,9 @@ class Arena(metaclass=BaseSingleton):
         # ODO возвращаем результат удара строкой
         result = self.player.use_skill(self.enemy)
         turn_result = self.next_turn()
+
+        result_enemy = self._check_players_hp()
+        if result_enemy is not None:
+            return f"{result}\n{turn_result}\n{result_enemy}"
+
         return f"{result}\n{turn_result}"
