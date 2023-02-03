@@ -1,5 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
+from typing import Optional
+
 from equipment import Weapon, Armor
 from classes import UnitClass
 from random import randint
@@ -13,13 +15,13 @@ class BaseUnit(ABC):
         """
         При инициализации класса Unit используем свойства класса UnitClass
         """
-        self.name = name
-        self.unit_class = unit_class
-        self.hp = unit_class.max_health
-        self.stamina = unit_class.max_stamina
-        self.weapon = None
-        self.armor = None
-        self._is_skill_used = False
+        self.name: str = name
+        self.unit_class: UnitClass = unit_class
+        self.hp: float = unit_class.max_health
+        self.stamina: float = unit_class.max_stamina
+        self.weapon: Optional[Weapon] = None
+        self.armor: Optional[Armor] = None
+        self._is_skill_used: bool = False
 
     @property
     def health_points(self) -> float:
@@ -39,7 +41,7 @@ class BaseUnit(ABC):
     def equip_armor(self, armor: Armor) -> str:
         # TODO одеваем новую броню
         self.armor = armor
-        return f"{self.name} экипирован броней {self.weapon.name}"
+        return f"{self.name} экипирован броней {self.armor.name}"
 
     def _count_damage(self, target: BaseUnit) -> int:
         # TODO Эта функция должна содержать:

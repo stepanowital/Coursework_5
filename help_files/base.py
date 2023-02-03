@@ -4,7 +4,7 @@ from unit import BaseUnit
 
 
 class BaseSingleton(type):
-    _instances = {}
+    _instances: dict = {}
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
@@ -56,7 +56,7 @@ class Arena(metaclass=BaseSingleton):
             else:
                 unit.stamina += self.STAMINA_PER_ROUND
 
-    def next_turn(self) -> str:
+    def next_turn(self) -> Optional[str]:
         # ODO СЛЕДУЮЩИЙ ХОД -> return result | return self.enemy.hit(self.player)
         # ODO срабатывает когда игрок пропускает ход или когда игрок наносит удар.
         # ODO создаем поле result и проверяем что вернется в результате функции self._check_players_hp
@@ -71,10 +71,10 @@ class Arena(metaclass=BaseSingleton):
             self._stamina_regeneration()
             return self.enemy.hit(self.player)
 
-    def _end_game(self) -> str:
+    def _end_game(self) -> Optional[str]:
         # ODO КНОПКА ЗАВЕРШЕНИЕ ИГРЫ - > return result: str
         # ODO очищаем синглтон - self._instances = {}
-        self._instances = {}
+        self._instances: dict = {}
         # ODO останавливаем игру (game_is_running)
         self.game_is_running = False
         # ODO возвращаем результат
