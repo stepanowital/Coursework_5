@@ -64,9 +64,11 @@ class Arena(metaclass=BaseSingleton):
         # ODO если же результата пока нет и после завершения хода игра продолжается,
         # ODO тогда запускаем процесс регенерации стамины и здоровья для игроков (self._stamina_regeneration)
         # ODO и вызываем функцию self.enemy.hit(self.player) - ответный удар врага
-        result = self._check_players_hp()
-        if result is not None:
-            return result
+
+        # result = self._check_players_hp()
+        # if result is not None:
+        #     return result
+
         if self.game_is_running:
             self._stamina_regeneration()
             return self.enemy.hit(self.player)
@@ -86,6 +88,11 @@ class Arena(metaclass=BaseSingleton):
         # ODO запускаем следующий ход
         # ODO возвращаем результат удара строкой
         result = self.player.hit(self.enemy)
+
+        result_player = self._check_players_hp()
+        if result_player is not None:
+            return f"{result}\n{result_player}"
+
         turn_result = self.next_turn()
 
         result_enemy = self._check_players_hp()

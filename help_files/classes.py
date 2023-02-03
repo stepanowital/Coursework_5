@@ -32,8 +32,18 @@ ThiefClass = UnitClass(
     armor=1.0,
     skill=HardShot())
 
+TerminatorClass = UnitClass(
+    name="Терминатор",
+    max_health=1000,
+    max_stamina=100,
+    attack=10.0,
+    stamina=1.0,
+    armor=10.0,
+    skill=HardShot())
+
 unit_classes = {
     ThiefClass.name: ThiefClass,
-    WarriorClass.name: WarriorClass
+    WarriorClass.name: WarriorClass,
+    TerminatorClass.name: TerminatorClass
 }
 
